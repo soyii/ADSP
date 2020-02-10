@@ -82,3 +82,35 @@ dim(y) <- c(20,5)
 outlier(y)
 outlier(y, opposite=T)
 boxplot(y)
+
+data(iris)
+
+which(iris$Sepal.Length==5.1)   #find locations
+iris$Sepal.Length[which(iris$Sepal.Length==5.1)]   #find values
+
+names(iris) <- tolower(names(iris))
+attach(iris)
+aggregate(sepal.length~species,iris,mean)
+
+sort(iris$sepal.length)
+iris$sepal.length
+
+x <- c(1,5,3,9,7) 
+order(x)
+order(-x)
+
+library(reshape2)
+data('airquality')
+names(airquality) <- tolower(names(airquality))
+head(airquality)
+aql <- melt(airquality, id.vars = c("month", "day"))
+head(aql)
+
+dcast(aql, month ~ variable)
+dcast(aql, month ~ variable, mean, na.rm = T)
+
+iris_na <- iris
+iris_na[c(10,20,30), 3] <- NA
+iris_na[!complete.cases(iris_na),]
+iris_na[complete.cases(iris_na),]
+na.omit(iris_na)
